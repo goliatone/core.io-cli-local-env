@@ -1,0 +1,40 @@
+{
+  "name": "core.io-cli-local-env",
+  "version": "0.0.0",
+  "description": "CLI utility to create local development environments",
+  "main": "index.js",
+  "scripts": {
+    "test": "bogota",
+    "dtest": "watch bogota test/"
+  },
+  "bin": {
+    "shuttle": "./bin/cli"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/goliatone/core.io-cli-local-env.git"
+  },
+  "keywords": [],
+  "author": "goliatone <hello@goliatone.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/goliatone/core.io-cli-local-env/issues"
+  },
+  "homepage": "https://github.com/goliatone/core.io-cli-local-env#readme",
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "caporal": "^0.8.0",
+    "child-process-promise": "^2.2.1",
+    "gextend": "^0.3.0",
+    "update-notifier": "^2.3.0"
+  },
+  "devDependencies": {
+    "bogota": "^2.0.4",
+    "nyc": "^10.3.2",
+    "sinon": "^2.2.0",
+    "tap-spec": "^4.1.1",
+    "tape": "^4.6.3",
+    "tape-catch": "^1.0.6",
+    "watch": "^1.0.2"
+  }
+}
