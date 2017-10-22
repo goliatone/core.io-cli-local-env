@@ -1,0 +1,18 @@
+#domain:{{ domain }}
+#proxy:{{ proxy }}
+
+http://{{ domain }} {
+	proxy / {{ proxy }} {
+		transparent
+		websocket
+		fail_timeout 0s
+	}
+}
+
+# https://{{ domain }} {
+# 	proxy / {{ proxy }} {
+# 		transparent
+# 		websocket
+# 		fail_timeout 0s
+# 	}
+# }
