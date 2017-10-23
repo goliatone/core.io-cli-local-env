@@ -17,7 +17,7 @@ class InstallCommand extends BaseCommand {
 
         const home = this.paths.home();
         const hosts = this.paths.hosts();
-        const sudoers = this.paths.etc('sudoers.d');
+        const sudoers = this.paths.root('etc', 'sudoers.d');
 
         // this.dryRun = true;
 
