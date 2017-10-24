@@ -15,4 +15,7 @@ module.exports.attach = function(prog) {
     List.attach(prog);
     Open.attach(prog);
     Share.attach(prog);
+    Restart.attach(prog);
+    Stop.attach(prog);
+    Start.attach(prog);
 };
