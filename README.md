@@ -6,6 +6,8 @@ This is a sample project. To get started:
 $ npm i core.io-cli-local-env
 ```
 
+NOTE: This is a rework of [marina-cli][marina-cli] with small modifications to suit a different setup.
+
 ## Local Development Environment
 
 ### MacOS
@@ -53,6 +55,7 @@ Dnsmasq is a lightweight DNS forwarder and DHCP server. We use [dnsmasq][dnsmasq
 [1]:https://ma.ttias.be/chrome-force-dev-domains-https-via-preloaded-hsts/
 [caddy]:https://caddyserver.com/
 [dnsmasq]: http://www.thekelleys.org.uk/dnsmasq/doc.html
+[marina-cli]: https://github.com/shnhrrsn/marina-cli
 
 #### Ngrok
 Ngrok is used to share local URLs.
