@@ -17,20 +17,22 @@ class InstallCommand extends BaseCommand {
 
         const home = this.paths.home();
         const hosts = this.paths.hosts();
+        const metafile = this.paths.metafile;
         const sudoers = this.paths.root('etc', 'sudoers.d');
 
         // this.dryRun = true;
 
         const Caddyfile = {
-			source: this.paths.config('Caddyfile'),
-			destination: this.paths.home('Caddyfile')
-		};
+            source: this.paths.config('Caddyfile'),
+            destination: this.paths.home('Caddyfile')
+        };
 
         return Promise.all([
-			this.execAsUser(`mkdir -p "${home}" "${hosts}"`),
-			this.execAsUser(`cp "${Caddyfile.source}" "${Caddyfile.destination}"`),
-			fsu.mkdirp(sudoers)
-		]).then(()=>{
+            this.execAsUser(`mkdir -p "${home}" "${hosts}"`),
+            this.execAsUser(`cp "${Caddyfile.source}" "${Caddyfile.destination}"`),
+            fsu.writeFile(metafile, '[]'),
+            fsu.mkdirp(sudoers)
+        ]).then(()=>{
             this.logger.info('done', Caddyfile);
 
             installers.each((Installer)=> {
