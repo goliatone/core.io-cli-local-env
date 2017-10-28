@@ -29,7 +29,9 @@ class ServeCommand extends OpenCommand {
                 return hostFile.create().then(()=>{
                     return this.addHostfile(hostFile);
                 }).then(()=>{
-                    caddy.restart();
+                    return caddy.restart();
+                }).then(()=>{
+                    return this.open(args.domain);
                 });
             });
         });
@@ -58,6 +60,7 @@ class ServeCommand extends OpenCommand {
         cmd.argument('<proxy>', 'Source host domain', /.*/);
         cmd.option('--name', 'Name for quick access', prog.BOOL);
         cmd.option('--save', 'Save for quick launch access', prog.BOOL, true);
+        cmd.option('--open', 'Open browser page with domain', prog.BOOL, true);
 
         cmd.action((args, options, logger)=>{
             const command = new ServeCommand({
