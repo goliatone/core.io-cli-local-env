@@ -18,4 +18,5 @@ module.exports.attach = function(prog) {
     Restart.attach(prog);
     Stop.attach(prog);
     Start.attach(prog);
+    Serve.attach(prog);
 };
