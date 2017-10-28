@@ -16,4 +16,6 @@ prog
 
 Commands.attach(prog);
 
+prog.help('This program uses Caddy server and Dnsmasq. It generates various files and uses brew to install dnsmasq.');
+
 prog.parse(process.argv);
