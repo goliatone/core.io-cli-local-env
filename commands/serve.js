@@ -62,6 +62,8 @@ class ServeCommand extends OpenCommand {
         cmd.option('--save', 'Save for quick launch access', prog.BOOL, true);
         cmd.option('--open', 'Open browser page with domain', prog.BOOL, true);
 
+        cmd.help('domain=my-app.core.test proxy=localhost:9090');
+
         cmd.action((args, options, logger)=>{
             const command = new ServeCommand({
                 logger
