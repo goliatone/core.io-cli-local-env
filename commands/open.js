@@ -17,9 +17,13 @@ class OpenCommand extends BaseCommand {
                     this.logger.error(msg);
                     return reject(msg);
                 }
-                return this.exec(`open "http://${host.domain}"`);
+                return this.open(host.domain);
             });
         });
+    }
+
+    open(domain){
+        return this.exec(`open "http://${domain}"`);
     }
 
     loadHostFromDomain(domain){
