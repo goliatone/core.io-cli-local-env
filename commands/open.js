@@ -10,16 +10,22 @@ const fsu = require('../lib/fs-utils');
 class OpenCommand extends BaseCommand {
 
     execute(args){
-        return new Promise((resolve)=>{
-            this.loadMetaFile().then((hosts)=>{
-                return this.findHost(args.domain, hosts);
-            }).then((host=false)=>{
+        return new Promise((resolve, reject)=>{
+            this.loadHostFromDomain(args.domain).then((host=false)=>{
                 if(!host){
-                    return this.logger.error('Host %s does not exists', args.domain);
+                    const msg = `Host ${args.domain} does not exists`;
+                    this.logger.error(msg);
+                    return reject(msg);
                 }
                 return this.exec(`open "http://${host.domain}"`);
             });
         });
+    }
+
+    loadHostFromDomain(domain){
+        return this.loadMetaFile().then((hosts)=>{
+                return this.findHost(domain, hosts);
+            });
     }
 
     loadMetaFile(){
@@ -42,6 +48,8 @@ class OpenCommand extends BaseCommand {
     }
 
     static attach(prog){
+        //TODO: refactor this. attach calls describe, which is what we do
+        //here
         const cmd = super.attach(prog);
 
         cmd.argument('<domain>', 'Domain to open', /.*/);
@@ -58,6 +66,8 @@ class OpenCommand extends BaseCommand {
                     process.exit(0);
                 });
         });
+
+        return cmd;
     }
 }
 
