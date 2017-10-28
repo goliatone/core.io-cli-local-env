@@ -9,6 +9,7 @@ const Start = require('./start');
 const Stop = require('./stop');
 const Uninstall = require('./uninstall');
 const Open = require('./open');
+const Update = require('./update');
 
 module.exports.attach = function(prog) {
     Install.attach(prog);
@@ -19,4 +20,5 @@ module.exports.attach = function(prog) {
     Stop.attach(prog);
     Start.attach(prog);
     Serve.attach(prog);
+    Update.attach(prog);
 };
