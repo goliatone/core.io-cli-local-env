@@ -1,5 +1,7 @@
-#domain:{{ domain }}
-#proxy:{{ proxy }}
+# File generated automatically by core.io
+# name: {{name}}
+# proxy: {{ proxy }}
+# domain: {{ domain }}
 
 http://{{ domain }} {
 	proxy / {{ proxy }} {
