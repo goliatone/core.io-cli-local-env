@@ -74,7 +74,7 @@ class ServeCommand extends OpenCommand {
                 .then((context)=>{
                     process.exit(0);
                 });
-        });
+        }); 
     }
 }
 
