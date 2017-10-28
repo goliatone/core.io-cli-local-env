@@ -4,11 +4,11 @@
 # domain: {{ domain }}
 
 http://{{ domain }} {
-	proxy / {{ proxy }} {
-		transparent
-		websocket
-		fail_timeout 0s
-	}
+    proxy / {{ proxy }} {
+        transparent
+        websocket
+        fail_timeout 0s
+    }
 }
 
 # https://{{ domain }} {
