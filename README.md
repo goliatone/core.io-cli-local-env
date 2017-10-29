@@ -1,14 +1,43 @@
 ## core.io-cli-local-env
 
-This is a sample project. To get started:
-
-```
-$ npm i core.io-cli-local-env
-```
-
-NOTE: This is a rework of [marina-cli][marina-cli] with small modifications to suit a different setup.
+core.io cli tool to manage local environments for development.
 
 ## Local Development Environment
+
+### CLI 
+
+```
+   shuttle 0.0.1 - CLI utility to create local development environments
+
+   USAGE
+
+     shuttle <command> [options]
+
+   COMMANDS
+
+     install                     Install all dependencies
+     list                        List all local domains
+     open <domain>               Open domain in default browser
+     share <project>             Generate a shareable URL for a project
+     restart                     Restart Caddy and Dnsmasq services
+     stop                        Stop Caddy and Dnsmasq services
+     start                       Start Caddy and Dnsmasq services
+     serve <domain> <proxy>      Proxy a local domain and save it for quick access
+     update                      Update toolchain
+     help <command>              Display help for a specific command
+
+   GLOBAL OPTIONS
+
+     -h, --help         Display help
+     -V, --version      Display version
+     --no-color         Disable colors
+     --quiet            Quiet mode - only displays warn and error messages
+     -v, --verbose      Verbose mode - will also output debug messages
+
+   MORE INFO
+
+     This program uses Caddy server and Dnsmasq. It generates various files and uses brew to install dnsmasq.
+```     
 
 ### MacOS
 
@@ -59,6 +88,11 @@ Dnsmasq is a lightweight DNS forwarder and DHCP server. We use [dnsmasq][dnsmasq
 
 #### Ngrok
 Ngrok is used to share local URLs.
+
+
+### Credits
+
+This is a rework of [marina-cli][marina-cli] with small modifications to suit a different setup.
 
 ## License
 ® License MIT by goliatone
