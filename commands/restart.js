@@ -1,6 +1,6 @@
 'use strict';
 
-const BaseCommand = require('./base');
+const BaseCommand = require('base-cli-commands').BaseCommand;
 const CaddyInstaller = require('../lib/installers/caddy');
 const DnsmasqInstaller = require('../lib/installers/dnsmasq');
 
