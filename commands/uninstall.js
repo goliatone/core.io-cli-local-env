@@ -21,22 +21,6 @@ class UninstallCommand extends BaseCommand {
             dnsmasq.remove()
         ]);
     }
-
-    static attach(prog){
-        const cmd = super.attach(prog);
-
-        cmd.action((args, options, logger)=>{
-            const command = new UninstallCommand({
-                logger
-            });
-            args.options = options;
-            command.ready()
-                .execute(args)
-                .then((context)=>{
-                    process.exit(0);
-                });
-        });
-    }
 }
 
 UninstallCommand.COMMAND_NAME = 'uninstall';
