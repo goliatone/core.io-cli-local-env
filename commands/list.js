@@ -34,21 +34,6 @@ class ListCommand extends BaseCommand {
             resolve();
         });
     }
-
-    static attach(prog){
-        const cmd = super.attach(prog);
-        cmd.action((args, options, logger)=>{
-            const command = new ListCommand({
-                logger
-            });
-            args.options = options;
-            command.ready()
-                .execute(args)
-                .then((context)=>{
-                    process.exit(0);
-                });
-        });
-    }
 }
 
 ListCommand.COMMAND_NAME = 'list';
