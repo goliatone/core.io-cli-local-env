@@ -72,8 +72,36 @@ class BaseCommand {
         this._dryRun = v;
     }
 
-    static attach(prog){
-        return prog.command(this.COMMAND_NAME, this.DESCRIPTION);
+    static attach(prog, namespace=false){
+        const name = (namespace ? namespace + ' ' : '') + this.COMMAND_NAME; 
+        
+        const cmd = prog.command(name, this.DESCRIPTION);
+
+        this.describe(prog, cmd);
+        
+        this.runner(cmd);
+    }
+
+    static describe(prog, cmd){}
+
+    static runner(cmd){
+        
+        const Command = this;
+
+        cmd.action((args, options, logger) => {
+            const command = new Command({
+                logger: logger
+            });
+
+            args.options = options;
+
+            command.ready()
+                .execute(args)
+                .then((context) => {
+                    process.exit(0);
+                })
+                .catch(logger.error);
+        });
     }
 }
 
