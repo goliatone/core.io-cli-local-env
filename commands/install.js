@@ -72,25 +72,6 @@ class InstallCommand extends BaseCommand {
     get useSudo(){
         return true;
     }
-
-    static attach(prog){
-        const cmd = super.attach(prog);
-        cmd.action((args, options, logger) => {
-            const command = new InstallCommand({
-                logger: logger
-            });
-
-            args.options = options;
-
-            command.ready()
-                .execute(args)
-                .then((context) => {
-                    logger.info('install command complete...');
-                    process.exit(0);
-                })
-                .catch(logger.error);
-        });
-    }
 }
 
 InstallCommand.COMMAND_NAME = 'install';
