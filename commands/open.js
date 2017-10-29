@@ -51,27 +51,8 @@ class OpenCommand extends BaseCommand {
         });
     }
 
-    static attach(prog){
-        //TODO: refactor this. attach calls describe, which is what we do
-        //here
-        const cmd = super.attach(prog);
-
+    static describe(prog, cmd){
         cmd.argument('<domain>', 'Domain to open', /.*/);
-
-        cmd.action((args, options, logger)=>{
-
-            const command = new OpenCommand({
-                logger
-            });
-            args.options = options;
-            command.ready()
-                .execute(args)
-                .then((context)=>{
-                    process.exit(0);
-                });
-        });
-
-        return cmd;
     }
 }
 
