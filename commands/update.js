@@ -23,22 +23,6 @@ class UpdateCommand extends BaseCommand {
             return dnsmasq.update();
         });
     }
-
-    static attach(prog){
-        const cmd = super.attach(prog);
-
-        cmd.action((args, options, logger)=>{
-            const command = new UpdateCommand({
-                logger
-            });
-            args.options = options;
-            command.ready()
-                .execute(args)
-                .then((context)=>{
-                    process.exit(0);
-                });
-        });
-    }
 }
 
 UpdateCommand.COMMAND_NAME = 'update';
