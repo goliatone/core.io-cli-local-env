@@ -11,14 +11,14 @@ const Uninstall = require('./uninstall');
 const Open = require('./open');
 const Update = require('./update');
 
-module.exports.attach = function(prog) {
-    Install.attach(prog);
-    List.attach(prog);
-    Open.attach(prog);
-    Share.attach(prog);
-    Restart.attach(prog);
-    Stop.attach(prog);
-    Start.attach(prog);
-    Serve.attach(prog);
-    Update.attach(prog);
+module.exports.attach = function(prog, namespace=false) {
+    Install.attach(prog, namespace);
+    List.attach(prog, namespace);
+    Open.attach(prog, namespace);
+    Share.attach(prog, namespace);
+    Restart.attach(prog, namespace);
+    Stop.attach(prog, namespace);
+    Start.attach(prog, namespace);
+    Serve.attach(prog, namespace);
+    Update.attach(prog, namespace);
 };
