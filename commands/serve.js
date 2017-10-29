@@ -62,8 +62,7 @@ class ServeCommand extends OpenCommand {
         return fsu.writeFile(metafile, content);
     }
 
-    static attach(prog){
-        const cmd = prog.command(this.COMMAND_NAME, this.DESCRIPTION);
+    static describe(prog, cmd){
 
         cmd.argument('<domain>', 'Domain to use', /.*/);
         cmd.argument('<proxy>', 'Source host domain', /.*/);
@@ -72,18 +71,6 @@ class ServeCommand extends OpenCommand {
         cmd.option('--open', 'Open browser page with domain', prog.BOOL, true);
 
         cmd.help('domain=my-app.core.test proxy=localhost:9090');
-
-        cmd.action((args, options, logger)=>{
-            const command = new ServeCommand({
-                logger
-            });
-            args.options = options;
-            command.ready()
-                .execute(args)
-                .then((context)=>{
-                    process.exit(0);
-                });
-        }); 
     }
 }
 
