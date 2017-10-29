@@ -1,7 +1,7 @@
 'use strict';
 
 const OpenCommand = require('./open');
-const fsu = require('../lib/fs-utils');
+const fsu = require('base-cli-commands').FsUtils;
 const HostFile = require('../lib/hostfile');
 const CaddyInstaller = require('../lib/installers/caddy');
 

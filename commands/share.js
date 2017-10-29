@@ -1,7 +1,7 @@
 'use strict';
 
-const BaseCommand = require('./base');
-const fsu = require('../lib/fs-utils');
+const fsu = require('base-cli-commands').FsUtils;
+const BaseCommand = require('base-cli-commands').BaseCommand;
 const ChildProcess = require('child-process-promise');
 
 class ShareCommand extends BaseCommand {
