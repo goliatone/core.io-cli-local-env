@@ -1,8 +1,7 @@
 'use strict';
 
-const fsu = require('../lib/fs-utils');
-
-const BaseCommand = require('./base');
+const fsu = require('base-cli-commands').FsUtils;
+const BaseCommand = require('base-cli-commands').BaseCommand;
 const installers = require('../lib/installers');
 
 class InstallCommand extends BaseCommand {
