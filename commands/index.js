@@ -1,5 +1,9 @@
 'use strict';
 
+const Paths = require('../lib/cli-paths');
+
+const Base = require('base-cli-commands').BaseCommand;
+
 const Install = require('./install');
 const List = require('./list');
 const Restart = require('./restart');
@@ -11,14 +15,21 @@ const Uninstall = require('./uninstall');
 const Open = require('./open');
 const Update = require('./update');
 
-module.exports.attach = function(prog, namespace=false) {
-    Install.attach(prog, namespace);
-    List.attach(prog, namespace);
-    Open.attach(prog, namespace);
-    Share.attach(prog, namespace);
-    Restart.attach(prog, namespace);
-    Stop.attach(prog, namespace);
-    Start.attach(prog, namespace);
-    Serve.attach(prog, namespace);
-    Update.attach(prog, namespace);
+module.exports.attach = function(app, namespace=false) {
+
+    const context = {
+        namespace,
+        prog: app.prog,
+        paths: new Paths()
+    };
+
+    Install.attach(context);
+    List.attach(context);
+    Open.attach(context);
+    Share.attach(context);
+    Restart.attach(context);
+    Stop.attach(context);
+    Start.attach(context);
+    Serve.attach(context);
+    Update.attach(context);
 };
