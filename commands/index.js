@@ -15,7 +15,12 @@ const Uninstall = require('./uninstall');
 const Open = require('./open');
 const Update = require('./update');
 
-module.exports.attach = function(app, namespace=false) {
+/**
+ * Attach commands to given application context,
+ * if a `namespace` is given then commands will 
+ * be added as sub-commands.
+ */
+module.exports.attach = function $attach(app, namespace=false) {
 
     const context = {
         namespace,
