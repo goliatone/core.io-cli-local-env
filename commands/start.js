@@ -16,22 +16,6 @@ class RestartCommand extends BaseCommand {
             dnsmasq.start()
         ]);
     }
-
-    static attach(prog){
-        const cmd = super.attach(prog);
-
-        cmd.action((args, options, logger)=>{
-            const command = new RestartCommand({
-                logger
-            });
-            args.options = options;
-            command.ready()
-                .execute(args)
-                .then((context)=>{
-                    process.exit(0);
-                });
-        });
-    }
 }
 
 RestartCommand.COMMAND_NAME = 'start';
