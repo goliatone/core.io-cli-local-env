@@ -44,21 +44,8 @@ class ShareCommand extends BaseCommand {
         });
     }
 
-    static attach(prog){
-        const cmd = super.attach(prog);
+    static describe(prog, cmd){
         cmd.argument('<project>', 'Project to share', /.*/);
-
-        cmd.action((args, options, logger)=>{
-            const command = new ShareCommand({
-                logger
-            });
-            args.options = options;
-            command.ready()
-                .execute(args)
-                .then((context)=>{
-                    process.exit(0);
-                });
-        });
     }
 }
 
