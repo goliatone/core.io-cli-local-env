@@ -1,7 +1,8 @@
 'use strict';
 
-const BaseCommand = require('./base');
-const fsu = require('../lib/fs-utils');
+const fsu = require('base-cli-commands').FsUtils;
+const BaseCommand = require('base-cli-commands').BaseCommand;
+
 const Table = require('cli-table-redemption');
 
 class ListCommand extends BaseCommand {
