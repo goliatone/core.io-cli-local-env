@@ -22,14 +22,10 @@
   },
   "homepage": "https://github.com/goliatone/core.io-cli-local-env#readme",
   "dependencies": {
+    "base-cli-commands": "0.0.3",
     "bluebird": "^3.5.1",
-    "caporal": "^0.8.0",
-    "child-process-promise": "^2.2.1",
     "cli-table-redemption": "^1.0.1",
-    "gextend": "^0.3.0",
-    "jstransformer": "^1.0.0",
-    "jstransformer-swig": "^0.2.1",
-    "update-notifier": "^2.3.0"
+    "gextend": "^0.3.0"
   },
   "devDependencies": {
     "bogota": "^2.0.4",
