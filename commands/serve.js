@@ -37,6 +37,11 @@ class ServeCommand extends OpenCommand {
         });
     }
 
+    /**
+     * The passed HostFile will be parsed and
+     * added to the .metafile
+     * @param {HostFile} host Hostfile definition
+     */
     addHostfile(host){
         return this.loadMetaFile().then((hosts=[])=>{
             hosts.push(host.toJSON());
@@ -48,6 +53,10 @@ class ServeCommand extends OpenCommand {
         });
     }
 
+    /**
+     * Update `.metafile` with new content.
+     * @param {String} content Content to be written
+     */
     saveMetaFile(content) {
         const metafile = this.paths.metafile;
         return fsu.writeFile(metafile, content);
