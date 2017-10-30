@@ -3,6 +3,7 @@
 const fsu = require('base-cli-commands').FsUtils;
 const BaseCommand = require('base-cli-commands').BaseCommand;
 const installers = require('../lib/installers');
+const Promise = require('bluebird');
 
 class InstallCommand extends BaseCommand {
 
@@ -29,9 +30,10 @@ class InstallCommand extends BaseCommand {
         return Promise.all([
             this.execAsUser(`mkdir -p "${home}" "${hosts}"`),
             this.execAsUser(`cp "${Caddyfile.source}" "${Caddyfile.destination}"`),
+            //This is creating the file as root
             fsu.writeFile(metafile, '[]'),
             fsu.mkdirp(sudoers)
-        ]).then(()=>{
+        ], {concurrency: 1}).then(()=>{
             this.logger.info('done', Caddyfile);
 
             installers.each((Installer)=> {
@@ -74,7 +76,7 @@ class InstallCommand extends BaseCommand {
 }
 
 InstallCommand.COMMAND_NAME = 'install';
-InstallCommand.DESCRIPTION = 'Install all dependencies';
+InstallCommand.DESCRIPTION = 'Install all dependencies. Needs sudo';
 
 
 
