@@ -30,8 +30,9 @@ class InstallCommand extends BaseCommand {
         return Promise.all([
             this.execAsUser(`mkdir -p "${home}" "${hosts}"`),
             this.execAsUser(`cp "${Caddyfile.source}" "${Caddyfile.destination}"`),
+            this.execAsUser(`touch ${metafile} && bash -c "echo [] > ${metafile}"`),
             //This is creating the file as root
-            fsu.writeFile(metafile, '[]'),
+            // fsu.writeFile(metafile, '[]'),
             fsu.mkdirp(sudoers)
         ], {concurrency: 1}).then(()=>{
             this.logger.info('done', Caddyfile);
