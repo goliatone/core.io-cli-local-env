@@ -3,14 +3,17 @@
 const fsu = require('base-cli-commands').FsUtils;
 const BaseCommand = require('base-cli-commands').BaseCommand;
 const installers = require('../lib/installers');
+
 const Promise = require('bluebird');
 
 class InstallCommand extends BaseCommand {
 
-    execute(args) {
+    async execute(args) {
 
         //Ensure we have brew installed:
-        //! this.commandExists('brew') -> error
+        const hasBrew = await this.commandExists('brew');
+        if (!hasBrew) this.error('You need to have brew installed.');
+
         //This command tool will class with:
         //this.commandExists('valet') -> error
         //this.commandExists('marina') -> error
@@ -27,51 +30,58 @@ class InstallCommand extends BaseCommand {
             destination: this.paths.home('Caddyfile')
         };
 
-        return Promise.all([
-            this.execAsUser(`mkdir -p "${home}" "${hosts}"`),
-            this.execAsUser(`cp "${Caddyfile.source}" "${Caddyfile.destination}"`),
-            this.execAsUser(`touch ${metafile} && bash -c "echo [] > ${metafile}"`),
-            //This is creating the file as root
-            // fsu.writeFile(metafile, '[]'),
-            fsu.mkdirp(sudoers)
-        ], {concurrency: 1}).then(()=>{
-            this.logger.info('done', Caddyfile);
+        await this.execAsUser(`mkdir -p "${home}" "${hosts}"`);
+        await this.execAsUser(`cp "${Caddyfile.source}" "${Caddyfile.destination}"`);
+        await this.execAsUser(`touch ${metafile} && bash -c "echo [] > ${metafile}"`);
+        //This is creating the file as root
+        // fsu.writeFile(metafile, '[]'),
+        await fsu.mkdirp(sudoers);
 
-            installers.each((Installer)=> {
-                const installer = new Installer({
-                    logger: this.logger,
-                    paths: this.paths
-                });
+        this.logger.info('done', Caddyfile);
 
-                const name = installer.constructor.name;
-                console.log('name', name);
-
-                installer.isInstalled().then((installed)=>{
-                    console.log('installed', installed);
-                    if(installed){
-                        return this.logger.info('Installer %s already installed', name);
-                    }
-
-                    this.logger.info('Installing %s', name);
-
-                    return Promise.all([
-                        installer.install(),
-                        installer.isService(),
-                        installer.isRunning()
-                    ]).then(([done, isService, isRunning])=>{
-                        if(isService && !isRunning) {
-                            this.logger.info('Starting %s', name);
-                            installer.start();
-                        } else {
-                            this.logger.info('Installed...');
-                        }
-                    });
-                });
-            });
-        });
+        try {
+            for (let key in installers) {
+                await this.runInstaller(installers[key]);
+            }
+        } catch (error) {
+            this.error(error);
+        }
     }
 
-    get useSudo(){
+    async runInstaller(Installer) {
+        const installer = new Installer({
+            logger: this.logger,
+            paths: this.paths
+        });
+
+        const name = installer.constructor.name;
+        this.logger.info('Running installer for "%s" starting...', name);
+
+        let installed = await installer.isInstalled();
+
+        if (installed) {
+            return this.logger.info('Installer %s already installed', name);
+        }
+
+        this.logger.info('Installing %s', name);
+
+        let done, isService, isRunning;
+        done = await installer.install();
+        isService = await installer.isService();
+        isRunning = await installer.isRunning();
+
+        if (isService && !isRunning) {
+            this.logger.info('Starting install "%s"...', name);
+            installer.start();
+        } else {
+            this.logger.info(' %s installed...', name);
+        }
+
+        return done;
+    }
+
+
+    get useSudo() {
         return true;
     }
 }
