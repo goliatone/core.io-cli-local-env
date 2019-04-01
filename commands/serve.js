@@ -7,15 +7,15 @@ const CaddyInstaller = require('../lib/installers/caddy');
 
 class ServeCommand extends OpenCommand {
 
-    execute(args){
+    execute(args) {
 
         const paths = this.paths;
         const logger = this.logger;
-        const caddy = new CaddyInstaller({logger});
+        const caddy = new CaddyInstaller({ logger });
 
         return new Promise((resolve, reject) => {
-            this.loadHostFromDomain(args.domain).then((host=false)=>{
-                if(host){
+            this.loadHostFromDomain(args.domain).then((host = false) => {
+                if (host) {
                     return reject('This domain already exists');
                 }
 
@@ -26,11 +26,11 @@ class ServeCommand extends OpenCommand {
 
                 hostFile.fromArgs(args);
 
-                return hostFile.create().then(()=>{
+                return hostFile.create().then(_ => {
                     return this.addHostfile(hostFile);
-                }).then(()=>{
+                }).then(_ => {
                     return caddy.restart();
-                }).then(()=>{
+                }).then(_ => {
                     return this.open(args.domain);
                 });
             });
@@ -42,13 +42,13 @@ class ServeCommand extends OpenCommand {
      * added to the .metafile
      * @param {HostFile} host Hostfile definition
      */
-    addHostfile(host){
-        return this.loadMetaFile().then((hosts=[])=>{
+    addHostfile(host) {
+        return this.loadMetaFile().then((hosts = []) => {
             hosts.push(host.toJSON());
             return hosts;
-        }).then((hosts)=>{
+        }).then(hosts => {
             return JSON.stringify(hosts, null, 4);
-        }).then((content)=>{
+        }).then(content => {
             return this.saveMetaFile(content);
         });
     }
@@ -62,11 +62,11 @@ class ServeCommand extends OpenCommand {
         return fsu.writeFile(metafile, content);
     }
 
-    static describe(prog, cmd){
+    static describe(prog, cmd) {
 
         cmd.argument('<domain>', 'Domain to use', /.*/);
         cmd.argument('<proxy>', 'Source host domain', /.*/);
-        cmd.option('--name', 'Name for quick access', prog.BOOL);
+        cmd.option('--name', 'Name for quick access', prog.STRING);
         cmd.option('--save', 'Save for quick launch access', prog.BOOL, true);
         cmd.option('--open', 'Open browser page with domain', prog.BOOL, true);
 
