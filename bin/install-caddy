@@ -1,16 +1,19 @@
 #!/usr/bin/env bash
 
 if [ -z "$1" ]; then
-	echo 'Invalid invocation'
+	echo 'Invalid invocation: missing argument'
 	exit 24
 fi
 
 DIR=/tmp/core.io-caddy
+
 mkdir -p $DIR
+
 pushd $DIR
 
-curl -L 'https://caddyserver.com/download/darwin/amd64' > caddy.zip
+curl -fsSL 'https://caddyserver.com/download/darwin/amd64?license=personal&telemetry=off' -o caddy.zip
 unzip caddy.zip
+
 mv caddy "$1"
 
 popd
