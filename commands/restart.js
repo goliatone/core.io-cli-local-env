@@ -6,10 +6,10 @@ const DnsmasqInstaller = require('../lib/installers/dnsmasq');
 
 class RestartCommand extends BaseCommand {
 
-    execute(args){
+    execute(args) {
         const logger = this.logger;
-        const caddy = new CaddyInstaller({logger});
-        const dnsmasq = new DnsmasqInstaller({logger});
+        const caddy = new CaddyInstaller({ logger });
+        const dnsmasq = new DnsmasqInstaller({ logger });
 
         return Promise.all([
             caddy.restart(),
