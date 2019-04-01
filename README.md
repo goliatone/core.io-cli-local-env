@@ -1,6 +1,10 @@
 ## core.io-cli-local-env
 
-core.io cli tool to manage local environments for development.
+core.io cli tool to manage local environments for development. 
+
+### Install
+
+It can be installed globally and it will be available as `shuttle`. To install run `npm i -g core.io-cli-local-env`.
 
 ## Local Development Environment
 
@@ -15,16 +19,18 @@ core.io cli tool to manage local environments for development.
 
    COMMANDS
 
-     install                     Install all dependencies
-     list                        List all local domains
-     open <domain>               Open domain in default browser
-     share <project>             Generate a shareable URL for a project
-     restart                     Restart Caddy and Dnsmasq services
-     stop                        Stop Caddy and Dnsmasq services
-     start                       Start Caddy and Dnsmasq services
-     serve <domain> <proxy>      Proxy a local domain and save it for quick access
-     update                      Update toolchain
-     help <command>              Display help for a specific command
+     install                     Install all dependencies. Needs sudo          
+     list                        List all local domains                        
+     open <domain>               Open domain in default browser                
+     share <project>             Generate a shareable URL for a project        
+     restart                     Restart Caddy and Dnsmasq services            
+     stop                        Stop Caddy and Dnsmasq services               
+     start                       Start Caddy and Dnsmasq services              
+     serve <domain> <proxy>      Proxy a local domain and save it 
+     remove <domain>             Remove a previously added domain              
+     update                      Update toolchain                              
+     uninstall                   Uninstall all files and binaries              
+     help <command>              Display help for a specific command   
 
    GLOBAL OPTIONS
 
@@ -79,6 +85,7 @@ We use [Caddy][caddy] server as a reverse proxy.
 Caddy is distributed as a single binary file and has a simple configuration similar to nginx's.
 
 #### DNS
+
 Dnsmasq is a lightweight DNS forwarder and DHCP server. We use [dnsmasq][dnsmasq] for DNS resolution.
 
 [1]:https://ma.ttias.be/chrome-force-dev-domains-https-via-preloaded-hsts/
@@ -87,6 +94,7 @@ Dnsmasq is a lightweight DNS forwarder and DHCP server. We use [dnsmasq][dnsmasq
 [marina-cli]: https://github.com/shnhrrsn/marina-cli
 
 #### Ngrok
+
 Ngrok is used to share local URLs.
 
 
