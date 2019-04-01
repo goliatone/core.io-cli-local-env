@@ -11,6 +11,7 @@ const Serve = require('./serve');
 const Share = require('./share');
 const Start = require('./start');
 const Stop = require('./stop');
+const Remove = require('./remove');
 const Uninstall = require('./uninstall');
 const Open = require('./open');
 const Update = require('./update');
@@ -20,7 +21,7 @@ const Update = require('./update');
  * if a `namespace` is given then commands will 
  * be added as sub-commands.
  */
-module.exports.attach = function $attach(app, namespace=false) {
+module.exports.attach = function $attach(app, namespace = false) {
 
     const context = {
         namespace,
@@ -36,5 +37,7 @@ module.exports.attach = function $attach(app, namespace=false) {
     Stop.attach(context);
     Start.attach(context);
     Serve.attach(context);
+    Remove.attach(context);
     Update.attach(context);
+    Uninstall.attach(context);
 };
