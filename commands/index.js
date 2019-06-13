@@ -2,8 +2,6 @@
 
 const Paths = require('../lib/cli-paths');
 
-const Base = require('base-cli-commands').BaseCommand;
-
 const Install = require('./install');
 const List = require('./list');
 const Restart = require('./restart');
