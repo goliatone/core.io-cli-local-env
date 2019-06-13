@@ -24,7 +24,6 @@ class InstallCommand extends BaseCommand {
         const sudoers = this.paths.root('etc', 'sudoers.d');
 
         // this.dryRun = true;
-
         const Caddyfile = {
             source: this.paths.config('Caddyfile'),
             destination: this.paths.home('Caddyfile')
@@ -88,7 +87,5 @@ class InstallCommand extends BaseCommand {
 
 InstallCommand.COMMAND_NAME = 'install';
 InstallCommand.DESCRIPTION = 'Install all dependencies. Needs sudo';
-
-
 
 module.exports = InstallCommand;
