@@ -4,8 +4,6 @@ const fsu = require('base-cli-commands').FsUtils;
 const BaseCommand = require('base-cli-commands').BaseCommand;
 const installers = require('../lib/installers');
 
-const Promise = require('bluebird');
-
 class InstallCommand extends BaseCommand {
 
     async execute(args) {
