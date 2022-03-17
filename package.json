@@ -4,8 +4,8 @@
   "description": "CLI utility to create local development environments",
   "main": "index.js",
   "scripts": {
-    "test": "bogota",
-    "dtest": "watch bogota test/"
+    "test": "tape test/**.js | tap-spec",
+    "cover": "./node_modules/.bin/nyc tape test/**.js"
   },
   "bin": {
     "shuttle": "./bin/cli"
@@ -22,17 +22,15 @@
   },
   "homepage": "https://github.com/goliatone/core.io-cli-local-env#readme",
   "dependencies": {
-    "base-cli-commands": "*",
-    "bluebird": "^3.5.1",
+    "base-cli-commands": "^0.4.1",
     "cli-table-redemption": "^1.0.1",
-    "gextend": "^0.3.0"
+    "gextend": "^0.8.0"
   },
   "devDependencies": {
-    "bogota": "^2.0.4",
-    "nyc": "^10.3.2",
-    "sinon": "^2.2.0",
-    "tap-spec": "^4.1.1",
-    "tape": "^4.6.3",
+    "nyc": "^15.1.0",
+    "sinon": "^13.0.1",
+    "tap-spec": "^5.0.0",
+    "tape": "^5.5.2",
     "tape-catch": "^1.0.6",
     "watch": "^1.0.2"
   }
