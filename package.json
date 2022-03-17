@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/goliatone/core.io-cli-local-env#readme",
   "dependencies": {
-    "base-cli-commands": "^0.4.0",
+    "base-cli-commands": "^0.5.0",
     "cli-table-redemption": "^1.0.1",
     "gextend": "^0.8.0"
   },
