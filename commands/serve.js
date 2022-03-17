@@ -64,11 +64,19 @@ class ServeCommand extends OpenCommand {
 
     static describe(prog, cmd) {
 
-        cmd.argument('<domain>', 'Domain to use', /.*/);
-        cmd.argument('<proxy>', 'Source host domain', /.*/);
-        cmd.option('--name', 'Name for quick access', prog.STRING);
-        cmd.option('--save', 'Save for quick launch access', prog.BOOL, true);
-        cmd.option('--open', 'Open browser page with domain', prog.BOOL, true);
+        cmd.argument('<domain>', 'Domain to use', { validator: /.*/ });
+        cmd.argument('<proxy>', 'Source host domain', { validator: /.*/ });
+        cmd.option('--name', 'Name for quick access', { validator: prog.STRING });
+
+        cmd.option('--save', 'Save for quick launch access', {
+            validator: prog.BOOL,
+            default: true
+        });
+
+        cmd.option('--open', 'Open browser page with domain', {
+            validator: prog.BOOL,
+            default: true
+        });
 
         cmd.help('domain=my-app.core.test proxy=localhost:9090');
     }
