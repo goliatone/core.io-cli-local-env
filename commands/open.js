@@ -66,7 +66,7 @@ class OpenCommand extends BaseCommand {
     }
 
     static describe(prog, cmd) {
-        cmd.argument('<domain>', 'Domain to open', /.*/);
+        cmd.argument('<domain>', 'Domain to open', { validator: /.*/ });
     }
 }
 
