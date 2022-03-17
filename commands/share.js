@@ -6,37 +6,37 @@ const ChildProcess = require('child-process-promise');
 
 class ShareCommand extends BaseCommand {
 
-    execute(args){
-        return new Promise((resolve)=>{
+    execute(args) {
+        return new Promise((resolve) => {
             const project = args.project;
-            this.loadMetaFile().then((hosts)=>{
+            this.loadMetaFile().then((hosts) => {
                 return this.findHost(project, hosts);
-            }).then((host=false)=>{
-                if(!host){
+            }).then((host = false) => {
+                if (!host) {
                     return this.logger.error('Host %s does not exists', project);
                 }
 
                 const ngrok = this.paths.home('ngrok');
 
-                return ChildProcess.spawn(ngrok, [ 'http', host.proxy ], {
+                return ChildProcess.spawn(ngrok, ['http', host.proxy], {
                     stdio: 'inherit'
                 });
             });
         });
     }
 
-    loadMetaFile(){
+    loadMetaFile() {
         const metafile = this.paths.metafile;
-        return fsu.readFile(metafile, 'utf-8').then((content='')=>{
+        return fsu.readFile(metafile, 'utf-8').then((content = '') => {
             return JSON.parse(content);
         });
     }
 
-    findHost(hostname, hosts=[]){
-        return new Promise((resolve)=>{
+    findHost(hostname, hosts = []) {
+        return new Promise((resolve) => {
             let output;
-            hosts.map((host)=>{
-                if(host.name === hostname){
+            hosts.map((host) => {
+                if (host.name === hostname) {
                     output = host;
                 }
             });
@@ -44,8 +44,8 @@ class ShareCommand extends BaseCommand {
         });
     }
 
-    static describe(prog, cmd){
-        cmd.argument('<project>', 'Project to share', /.*/);
+    static describe(prog, cmd) {
+        cmd.argument('<project>', 'Project to share', { validator: /.*/ });
     }
 }
 
