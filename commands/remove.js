@@ -71,7 +71,7 @@ class RemoveCommand extends OpenCommand {
 
     static describe(prog, cmd) {
 
-        cmd.argument('<domain>', 'Domain to use', /.*/);
+        cmd.argument('<domain>', 'Domain to use', { validator: /.*/ });
         // cmd.option('--name', 'Name for quick access', prog.BOOL);
 
         cmd.help('domain=my-app.core.test');
